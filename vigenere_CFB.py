@@ -1,13 +1,13 @@
 '''
     Author: David Madrigal Buendía
-    This is an example or basic implementation for vigenere mod CFB
+    This is an example or basic implementation for vigenere CFB mod
 '''
 import os
 import random
 
 class vigenere_CFB:
     '''
-    A class used from basic vigenere cipher mod CFB
+    A class used from basic vigenere cipher CFB mod
 
     Attributes
     ----------
@@ -42,14 +42,14 @@ class vigenere_CFB:
         Complete blocks with spaces if any element don't have the size
     indice_caracter(c)
         Gets index from the alphabet by c
-    cifrar_cfb(blocks, llave, iv)
-        Encipher using vigenere mod CFB
-    cifrar_bloque_cfb(texto, llave, iv)
-        Encipher using vigenere mod CFB, block cipher
-    decifrar_cfb(ciphertext, llave, iv)
-        Decipher using vigenere mod CFB
-    decifrar_bloque_cfb(ciphertext, llave, iv)
-        Decipher using vigenere mod CFB, block cipher
+    cifrar_cfb(bloques, llave, iv)
+        Encipher using vigenere CFB mod
+    cifrar_bloque_cfb(bloque, llave, iv)
+        Encipher using vigenere CFB mod, block cipher
+    decifrar_cfb(bloques, llave, iv)
+        Decipher using vigenere CFB mod
+    decifrar_bloque_cfb(bloque, llave, iv)
+        Decipher using vigenere CFB mod, block cipher
     '''
     alfabetoIngles = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p', 'q','r','s','t','u','v','w','x','y','z',' ','-','/','*','<','0']
     alfabeto = alfabetoIngles
@@ -243,13 +243,13 @@ class vigenere_CFB:
         '''
         return self.alfabeto.index(c)
 
-    def cifrar_cfb(self, blocks, llave, iv):
+    def cifrar_cfb(self, bloques, llave, iv):
         '''
         Encipher using vigenere mod CFB
 
         Parameters
         ----------
-        blocks : str[]
+        bloques : str[]
             Text into blocks by key size
         llave : str
             Key for vigenere cipher
@@ -264,24 +264,24 @@ class vigenere_CFB:
         ciphertext = []
 
         #First block
-        bloque_ciphertext = self.cifrar_bloque_cfb(blocks[0], llave, iv)
+        bloque_ciphertext = self.cifrar_bloque_cfb(bloques[0], llave, iv)
         ciphertext.append(bloque_ciphertext)
 
         #Follow blocks
-        for i in range(1, len(blocks)):
-            bloque_ciphertext = self.cifrar_bloque_cfb(blocks[i], llave, ciphertext[i-1])
+        for i in range(1, len(bloques)):
+            bloque_ciphertext = self.cifrar_bloque_cfb(bloques[i], llave, ciphertext[i-1])
             ciphertext.append(bloque_ciphertext)
             
         return ciphertext
 
-    def cifrar_bloque_cfb(self, texto, llave, iv):
+    def cifrar_bloque_cfb(self, bloque, llave, iv):
         '''
         Encipher using vigenere mod CFB, block cipher
         The texto, llave and iv, needs to have the same size
 
         Parameters
         ----------
-        texto : str
+        bloque : str
             A text from block texts
         llave : str
             Key for vigenere cipher
@@ -295,23 +295,23 @@ class vigenere_CFB:
         '''
         bloque_ciphertext = []
         #Step: Vigenere
-        for j in range(len(texto)):
+        for j in range(len(bloque)):
             caracter_cifrado = (self.indice_caracter(iv[j]) + self.indice_caracter(llave[j])) % len(self.alfabeto)
             bloque_ciphertext.append(self.alfabeto[caracter_cifrado])
         #Step: Xor
         for j in range(len(bloque_ciphertext)):
-            caracter_cifrado = self.logical_xor(self.indice_caracter(bloque_ciphertext[j]), self.indice_caracter(texto[j])) % len(self.alfabeto)
+            caracter_cifrado = self.logical_xor(self.indice_caracter(bloque_ciphertext[j]), self.indice_caracter(bloque[j])) % len(self.alfabeto)
             bloque_ciphertext[j] = self.alfabeto[caracter_cifrado]
             
         return bloque_ciphertext
 
-    def decifrar_cfb(self, ciphertext, llave, iv):
+    def decifrar_cfb(self, bloques, llave, iv):
         '''
         Decipher using vigenere mod CFB
 
         Parameters
         ----------
-        ciphertext : str[]
+        bloques : str[]
             Ciphertext into blocks by key size
         llave : str
             Key for vigenere cipher
@@ -323,27 +323,27 @@ class vigenere_CFB:
         str[]
             Blocks of plaintext
         '''
-        texto = []
+        plaintext = []
 
         #First block
-        bloque_texto = self.decifrar_bloque_cfb(ciphertext[0], llave, iv)
-        texto.append(bloque_texto)
+        bloque_plaintext = self.decifrar_bloque_cfb(bloques[0], llave, iv)
+        plaintext.append(bloque_plaintext)
 
         #Follow blocks
-        for i in range(1, len(ciphertext)):
-            bloque_texto = self.decifrar_bloque_cfb(ciphertext[i], llave, ciphertext[i-1])
-            texto.append(bloque_texto)
+        for i in range(1, len(bloques)):
+            bloque_plaintext = self.decifrar_bloque_cfb(bloques[i], llave, bloques[i-1])
+            plaintext.append(bloque_plaintext)
             
-        return texto
+        return plaintext
 
-    def decifrar_bloque_cfb(self, ciphertext, llave, iv):
+    def decifrar_bloque_cfb(self, bloque, llave, iv):
         '''
         Decipher using vigenere mod CFB, block cipher
         The ciphertext, llave and iv, needs to have the same size
 
         Parameters
         ----------
-        ciphertext : str
+        bloque : str
             A ciphertext from block of ciphertext
         llave : str
             Key for vigenere cipher
@@ -355,14 +355,14 @@ class vigenere_CFB:
         str
             Block of plaintext
         '''
-        bloque_texto = []
+        bloque_plaintext = []
         #Step: Vigenere
-        for j in range(len(ciphertext)):
+        for j in range(len(llave)):
             caracter = (self.indice_caracter(iv[j]) + self.indice_caracter(llave[j])) % len(self.alfabeto)
-            bloque_texto.append(self.alfabeto[caracter])
+            bloque_plaintext.append(self.alfabeto[caracter])
         #Step: Xor
-        for j in range(len(bloque_texto)):
-            caracter = self.logical_xor(self.indice_caracter(bloque_texto[j]), self.indice_caracter(ciphertext[j])) % len(self.alfabeto)
-            bloque_texto[j] = self.alfabeto[caracter]
+        for j in range(len(bloque_plaintext)):
+            caracter = self.logical_xor(self.indice_caracter(bloque_plaintext[j]), self.indice_caracter(bloque[j])) % len(self.alfabeto)
+            bloque_plaintext[j] = self.alfabeto[caracter]
             
-        return bloque_texto
+        return bloque_plaintext

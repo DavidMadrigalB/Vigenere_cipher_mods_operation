@@ -3,3 +3,5 @@
 __pycache__/vigenere_CFB.cpython-38.pyc
 key.vig
 CifradoCTR.vig
+CifradoCBC.vig
+CifradoCFB.vig

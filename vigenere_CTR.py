@@ -1,13 +1,13 @@
 '''
     Author: David Madrigal Buendía
-    This is an example or basic implementation for vigenere mod CTR
+    This is an example or basic implementation for vigenere CTR mod
 '''
 import os
 import random
 
 class vigenere_CTR:
     '''
-    A class used from basic vigenere cipher mod CTR
+    A class used from basic vigenere cipher CTR mod
 
     Attributes
     ----------
@@ -44,14 +44,14 @@ class vigenere_CTR:
         Complete blocks with spaces if any element don't have the size
     indice_caracter(c)
         Gets index from the alphabet by c
-    cifrar_cfb(blocks, llave, iv)
-        Encipher using vigenere mod CFB
-    cifrar_bloque_cfb(texto, llave, iv)
-        Encipher using vigenere mod CFB, block cipher
-    decifrar_cfb(ciphertext, llave, iv)
-        Decipher using vigenere mod CFB
-    decifrar_bloque_cfb(ciphertext, llave, iv)
-        Decipher using vigenere mod CFB, block cipher
+    cifrar_ctr(bloques, llave, iv)
+        Encipher using vigenere CTR mod
+    cifrar_bloque_ctr(bloque, llave, iv)
+        Encipher using vigenere CTR mod, block cipher
+    decifrar_ctr(bloques, llave, iv)
+        Decipher using vigenere CTR mod
+    decifrar_bloque_ctr(bloque, llave, iv)
+        Decipher using vigenere CTR mod, block cipher
     '''
     alfabetoIngles = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p', 'q','r','s','t','u','v','w','x','y','z',' ','-','/','*','<','0']
     alfabeto = alfabetoIngles
