@@ -44,13 +44,13 @@ class vigenere_CTR:
         Complete blocks with spaces if any element don't have the size
     indice_caracter(c)
         Gets index from the alphabet by c
-    cifrar_ctr(bloques, llave, iv)
+    cifrar_ctr(bloques, llave, contadores)
         Encipher using vigenere CTR mod
-    cifrar_bloque_ctr(bloque, llave, iv)
+    cifrar_bloque_ctr(bloque, llave, contador)
         Encipher using vigenere CTR mod, block cipher
-    decifrar_ctr(bloques, llave, iv)
+    decifrar_ctr(bloques, llave, contadores)
         Decipher using vigenere CTR mod
-    decifrar_bloque_ctr(bloque, llave, iv)
+    decifrar_bloque_ctr(bloque, llave, contador)
         Decipher using vigenere CTR mod, block cipher
     '''
     alfabetoIngles = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p', 'q','r','s','t','u','v','w','x','y','z',' ','-','/','*','<','0']
@@ -250,7 +250,7 @@ class vigenere_CTR:
         '''
         return self.alfabeto.index(c)
 
-    def cifrar_ctr(self, bloques, contadores, llave):
+    def cifrar_ctr(self, bloques, llave, contadores):
         '''
         Encipher using vigenere CTR mod
 
@@ -258,11 +258,11 @@ class vigenere_CTR:
         ----------
         bloques : str[]
             Text into blocks by key size
-        contadores : str[]
-            Counts into blocks by key size
         llave : str
             Key for vigenere cipher
-
+        contadores : str[]
+            Counts into blocks by key size
+        
         Returns
         -------
         str[]
@@ -271,12 +271,12 @@ class vigenere_CTR:
         ciphertext = []
         #All blocks
         for i in range(0, len(bloques)):
-            bloque_ciphertext = self.cifrar_bloque_ctr(bloques[i], contadores[i], llave)
+            bloque_ciphertext = self.cifrar_bloque_ctr(bloques[i], llave, contadores[i])
             ciphertext.append(bloque_ciphertext)
             
         return ciphertext
 
-    def cifrar_bloque_ctr(self, bloque, contador, llave):
+    def cifrar_bloque_ctr(self, bloque, llave, contador):
         '''
         Encipher using vigenere mod CTR, block cipher
 
@@ -284,10 +284,10 @@ class vigenere_CTR:
         ----------
         bloque : str
             A text
-        contador : str
-            A count
         llave : str
             Key for vigenere cipher
+        contador : str
+            A count
 
         Returns
         -------
@@ -307,7 +307,7 @@ class vigenere_CTR:
             
         return bloque_ciphertext
 
-    def decifrar_ctr(self, bloques, contadores, llave):
+    def decifrar_ctr(self, bloques, llave, contadores):
         '''
         Decipher using vigenere CTR mod
 
@@ -315,10 +315,10 @@ class vigenere_CTR:
         ----------
         bloques : str[]
             Ciphertext into blocks by key size
-        contadores : str[]
-            Counts into blocks by key size
         llave : str
             Key for vigenere cipher
+        contadores : str[]
+            Counts into blocks by key size
 
         Returns
         -------
@@ -328,12 +328,12 @@ class vigenere_CTR:
         plaintext = []
         #All blocks
         for i in range(0, len(bloques)):
-            bloque_plaintext = self.decifrar_bloque_ctr(bloques[i], contadores[i], llave)
+            bloque_plaintext = self.decifrar_bloque_ctr(bloques[i], llave, contadores[i])
             plaintext.append(bloque_plaintext)
             
         return plaintext
 
-    def decifrar_bloque_ctr(self, bloque, contador, llave):
+    def decifrar_bloque_ctr(self, bloque, llave, contador):
         '''
         Decipher using vigenere mod CTR, block cipher
 
@@ -341,10 +341,10 @@ class vigenere_CTR:
         ----------
         bloque : str
             A ciphertext
-        contador : str
-            A count
         llave : str
             Key for vigenere cipher
+        contador : str
+            A count
 
         Returns
         -------

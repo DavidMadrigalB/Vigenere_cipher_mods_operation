@@ -14,7 +14,7 @@ print("mensaje separado: ", mensajeSeparado)
 contadores = vig_CTR.generate_counts(len(mensajeSeparado), llave)
 print("contadores:", contadores)
 
-ciphertext_bloques = vig_CTR.cifrar_ctr(mensajeSeparado, contadores, llave)
+ciphertext_bloques = vig_CTR.cifrar_ctr(mensajeSeparado, llave, contadores)
 ciphertext = vig_CTR.concatenar_bloques(ciphertext_bloques)
 print("ciphertext:", ciphertext)
 
@@ -36,6 +36,6 @@ contadores = vig_CTR.bloquesTexto(llave_con_contadores[1], llave)
 ciphertextSeparado = vig_CTR.completarBloques(vig_CTR.bloquesTexto(ciphertext.lower(), llave), len(llave))
 print("cifrado separado: ", ciphertextSeparado)
 
-texto_bloques = vig_CTR.decifrar_ctr(ciphertextSeparado, contadores, llave)
+texto_bloques = vig_CTR.decifrar_ctr(ciphertextSeparado, llave, contadores)
 texto = vig_CTR.concatenar_bloques(texto_bloques)
 print("texto:", texto)
