@@ -37,6 +37,5 @@ ciphertextSeparado = vig_CFB.completarBloques(vig_CFB.bloquesTexto(ciphertext.lo
 print("cifrado separado: ", ciphertextSeparado)
 
 texto_bloques = vig_CFB.decifrar_cfb(ciphertextSeparado, llave, iv)
-print("texto", texto_bloques)
 texto = vig_CFB.concatenar_bloques(texto_bloques)
 print("texto:", texto)

@@ -177,7 +177,7 @@ class vigenere_CFB:
         str
             A random key generated
         '''
-        num = random.randint(vigenere_CFB.tam_llave_min, vigenere_CFB.tam_llave_max)
+        num = random.randint(self.tam_llave_min, self.tam_llave_max)
         llave = ''
         for i in range(num):
             llave += self.random_char()
@@ -277,7 +277,7 @@ class vigenere_CFB:
     def cifrar_bloque_cfb(self, texto, llave, iv):
         '''
         Encipher using vigenere mod CFB, block cipher
-        The texo, llave and iv, needs to have the same size
+        The texto, llave and iv, needs to have the same size
 
         Parameters
         ----------
